@@ -25,3 +25,6 @@ D:\C#\Buisness System\OsnTon\Ton\bin\Debug\AForge.dll
 D:\C#\Buisness System\OsnTon\Ton\bin\Debug\AForge.Math.dll
 D:\C#\Buisness System\OsnTon\Ton\bin\Debug\AForge.xml
 D:\C#\Buisness System\OsnTon\Ton\bin\Debug\AForge.Math.xml
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\Ton.exe.config
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.exe
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.pdb
