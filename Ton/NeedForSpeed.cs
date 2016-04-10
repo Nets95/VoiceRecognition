@@ -62,11 +62,12 @@ namespace Ton
          * @param   xIm     Imaginary part of input/output
          * @param   inverse If true, do an inverse FFT
          */
-        public static void run(
+        public static double[] run(
              ref double[] xRe,
              ref double[] xIm,
             bool inverse = false )
         {
+            double[] Res = new double[xIm.Length * 2]; 
             uint numFlies = m_N >> 1; // Number of butterflies per sub-FFT
             uint span = m_N >> 1;     // Width of the butterfly
             uint spacing = m_N;         // Distance between start of sub-FFTs
@@ -161,6 +162,20 @@ namespace Ton
                 xIm[target] = x.im;
                 x = x.next;
             }
+
+
+            int ku = 1;
+            int p = 0;
+            var window = 0.0;
+            for (int j = 0; j < Res.Length; j++)
+            {
+                if (ku > (Res.Length))
+                    break;
+                window = 0.54 - 0.46 * Math.Cos((2 * Math.PI * j) / Res.Length - 1);
+                Res[j] = window * Math.Sqrt(xRe[p] * xRe[p] + xIm[p] * xIm[p]);
+                p++;
+            }
+            return Res;
         }
  
         /**

@@ -50,11 +50,26 @@ namespace Ton
 
 
         }
-        static double[] data;
-        static double[] Result;
+        public static double[] data;
+        public static double[] Result;
+
+
+        public double[] FuncSin()
+        {
+            int sampleRate = 8000;
+            double[] buffer = new double[8000];
+            double amplitude = 0.25 * short.MaxValue;
+            double frequency = 1000;
+            for (int n = 0; n < buffer.Length; n++)
+            {
+                buffer[n] = (short)(amplitude * Math.Cos ((2 * Math.PI * n * frequency) / sampleRate));
+            }
+            return buffer;
+        }
+        static double[] Sin;
         public static double[] GetResult()
         {
-            return Result;
+            return Sin;
         }
         public static double[] GetData()
         {
@@ -77,7 +92,7 @@ namespace Ton
             }
 
         }
-        FFTransform ffTransforme = new FFTransform();
+       
         void waveSource_RecordingStopped(object sender, StoppedEventArgs e)
         {
             if (waveSource != null)
@@ -118,155 +133,102 @@ namespace Ton
 
 
 
-            // Object of FFTransform class;
-           ///
-          ///  ffTransforme.RealFFT(data, true);
-            var window = 0.0;
+            
             double krokForDouble = 0.0;
 
-            //Object of AFFT classs;
-           // AFFT secondOne = new AFFT();
-            //secondOne.frequencies(data);
-
+            
             double fn = 8000;
             int ifn = Convert.ToInt32(fn);
             int p2 = (int)wave.SampleCount;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            //FFT MMA = new FFT();
+           
             
-            //double[] c = new double[data.Length];
-            //double[] Out = new double[data.Length];
+             double[] x = new double[data.Length];
+             double[] y = new double[data.Length];
+             int siz = 2 * data.Length;
             
-            
-            //fft End = new fft();
-            //End.fft_make(p2, c);
-            //End.fft_calc(p2, c, data, Out, true);
-            //for (int d = 0; d < data.Length; d++)
-            //{
-            //   // window = 0.54 - 0.46 * Math.Cos((2 * Math.PI * d) / data.Length - 1);
-            //    chart2.Series[0].Points.AddXY(d, Math.Abs(data[d]));
-            //}
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            double[] x = new double[data.Length];
-            double[] y = new double[data.Length];
-            int siz = 2 * data.Length;
+
             Result = new double[2*data.Length];
 
-            int Krok = 0;
-            
-            for (int j = 0; j < data.Length; j++)
-            {
-                x[j] = data[j];
-               
-            }
-            //for (int j = 0; j < data.Length; j+=2)
+
+
+            //for (int j = 0; j < data.Length; j++)
             //{
-            //    x[Krok] = data[j];
+            //    x[j] = data[j];
+
+
+            //}
+            //int Krok = 0;
+            
+            //for (int j = 0; j < Sin.Length; j += 2)
+            //{
+            //    x[Krok] = Sin[j];
             //    Krok++;
             //}
             //Krok = 0;
-            //for (int j = 1; j <= data.Length-1; j+=2)
+            //for (int j = 1; j <= Sin.Length - 1; j += 2)
             //{
-            //    y[Krok] = 0;
-            //    //y[Krok] = data[j];
+            //    //y[Krok] = 0;
+            //    y[Krok] = Sin[j];
             //    Krok++;
             //}
-            double m = 15;
+            //double m = 15;
             // m = Math.Round(Math.Log(data.Length/2,2));
 
-            NeedForSpeed ob = new NeedForSpeed();
+            // NeedForSpeed ob = new NeedForSpeed();
 
-            NeedForSpeed.init((uint)m);
-            NeedForSpeed.run( ref x,  ref y, false);
+            // NeedForSpeed.init((uint)m);
+            //Result =  NeedForSpeed.run( ref x,  ref y, false);
 
-        //fastFourierTransform ob = new fastFourierTransform();
-        //ob.FFT(1, (long)m, x, y);
-        //Krok = 0;
-        // for (int j = data.Length-1; j > 0 ; j-=2)
-        //{
-        //    Result[j] = x[Krok];
-        //    Krok++;
-        //}
-        // Krok = 0;
-        // for (int j = data.Length-2; j >= 1 ; j-=2)
-        //{
-        //    Result[j] = y[Krok];
-        //    Krok++;
-        //}
-        //Krok = 0;
-
-        //for (int j = 0; j < data.Length - 2; j += 2)
-        //{
-        //    Result[j] = x[Krok];
-        //    Krok++;
-        //}
-        //for (int j = 0; j < data.Length - 2; j += 2)
-        //{
-        //    Result[j] = x[Krok];
-        //    Krok++;
-        //}
-        //Krok = 0;
-        //for (int j = 1; j < data.Length - 2; j += 2)
-        //{
-        //    Result[j] = y[Krok];
-        //    Krok++;
-        //}
-        int k = 1;
-            int p = 0;
-           // double max = Result[0];
-            //for (int d = 0; d < Result.Length; d++)
-            //{
-            //    if (max < Result[d]) { max = Result[d]; }
-            //}
-            for (int j = 0; j < (data.Length/2)-2; j++)
-             {
-                 if (k > (data.Length / 2) - 1)
-                     break;
-                window = 0.54 - 0.46 * Math.Cos((2 * Math.PI * j) / Result.Length - 1);
-                Result[j] = window * Math.Sqrt(x[p] * x[p] + y[p] * y[p]);
-                 //k += 1;
-                 p ++; 
-             }
-
+            
             int iter = 0;
-
-
-           
-
-            for (int d = 0; d <22050; d++)
+            Sin = data;
+            System.Numerics.Complex[] com = new System.Numerics.Complex[Sin.Length];
+            
+            for (int d = 0; d < Sin.Length; d++)
             {
-                chart2.Series[0].Points.AddXY(iter, Result[d]);
+                double doubleValue = Sin[d];
+                com[d] = doubleValue;   
+            }
+            FFTAforge.FFT(ref com);
+            //MessageBox.Show(com[0].Real.ToString());
+
+            double compVale = 0.0;
+            for (int d = 0; d < Sin.Length; d++)
+            {
+                compVale = com[d].Magnitude;
+                Sin[d] = compVale;
+            }
+            double window = 0;
+            for (int d = 0; d < Sin.Length/2; d++)
+            {
+                window = 0.54 - 0.46 * Math.Cos((2 * Math.PI * d) / (12 - 1));
+                chart2.Series[0].Points.AddXY(iter, window*Sin[d]);
                 iter++;
             }
 
-            double[] mc = MFCC.mfcc(data);
+            double[] mfc;
+           
+            mfc = MFCC.mfcc(Sin);
             double suma = 0;
             int count = 0;
+            
+            chart3.Series[0].Points.Clear();
             for (int d = 0; d < 12; d++)
             {
-                    suma += Math.Abs(mc[d]);
+                    suma += Math.Abs(mfc[d]);
                     count++;
-                
-                chart3.Series[0].Points.AddXY(d, mc[d]);
+                 
+                 chart3.Series[0].Points.AddXY(d, Math.Abs(mfc[d]));
                 iter++;
             }
-            //if (suma < )
-            //    MessageBox.Show("Men");
-            //else
-            //    MessageBox.Show("Woomen");
-            MessageBox.Show((suma/count).ToString());
-            // 23:26:41
-            //оце кусок коду,який відповідає просто за спектрограмму
-            //Вова набирає повідомлення..
-
-
-            //for (int j = 0; j < ffTransforme.Data.Length; j+=2)
-            //{
-            //    if (ffTransforme.Data[j] > 0)
-            //        chart2.Series[0].Points.AddXY(j, ffTransforme.Data[j]*window);
-            //        //chart2.Series[0].Points.AddXY(j, secondOne.Result[j]);
-
-            //}
+            double a, b = 0.0;
+            a = suma / count;
+            if (a < 0.5+0.25)
+                MessageBox.Show("Men");
+            else
+                if ((a > 0.5+0.25)&&(a<1+0.25))
+                MessageBox.Show("Woomen");
+          //  MessageBox.Show((suma / count).ToString());
 
             btnStart.Enabled = true;
         }
