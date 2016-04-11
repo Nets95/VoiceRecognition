@@ -28,3 +28,16 @@ D:\C#\Buisness System\OsnTon\Ton\bin\Debug\AForge.Math.xml
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\Ton.exe.config
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.exe
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.pdb
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\Ton.exe
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\Ton.pdb
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\AForge.dll
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\AForge.Math.dll
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\MathNet.Numerics.dll
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\NAudio.dll
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\AForge.xml
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\AForge.Math.xml
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\MathNet.Numerics.xml
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\NAudio.xml
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.Form1.resources
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.Properties.Resources.resources
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.csproj.GenerateResource.Cache

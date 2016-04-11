@@ -150,7 +150,8 @@ namespace Ton
                 if (maxi * maxi < empreinte[i] * empreinte[i])
                     maxi = empreinte[i];
             }
-            for (i = 0; i < 12; i++) empreinte[i] = (empreinte[i] / Math.Abs(maxi)) * 2;
+            for (i = 0; i < 12; i++)
+                empreinte[i] = (empreinte[i] / Math.Abs(maxi)) * 2;
 
             return empreinte;
 

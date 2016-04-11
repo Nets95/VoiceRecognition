@@ -128,25 +128,13 @@ namespace Ton
                 krok += 1.0/44100.0;
             }
 
-
-
-
-
-
-            
-            double krokForDouble = 0.0;
-
-            
+            double krokForDouble = 0.0;            
             double fn = 8000;
             int ifn = Convert.ToInt32(fn);
             int p2 = (int)wave.SampleCount;
-           
-            
-             double[] x = new double[data.Length];
-             double[] y = new double[data.Length];
-             int siz = 2 * data.Length;
-            
-
+            double[] x = new double[data.Length];
+            double[] y = new double[data.Length];
+            int siz = 2 * data.Length;
             Result = new double[2*data.Length];
 
 
@@ -189,17 +177,20 @@ namespace Ton
                 double doubleValue = Sin[d];
                 com[d] = doubleValue;   
             }
-            FFTAforge.FFT(ref com);
-            //MessageBox.Show(com[0].Real.ToString());
 
+            FFTAforge.FFT(ref com);
+            
             double compVale = 0.0;
+
             for (int d = 0; d < Sin.Length; d++)
             {
                 compVale = com[d].Magnitude;
                 Sin[d] = compVale;
             }
+
             double window = 0;
-            for (int d = 0; d < Sin.Length/2; d++)
+
+            for (int d = 0; d < Sin.Length; d++)
             {
                 window = 0.54 - 0.46 * Math.Cos((2 * Math.PI * d) / (12 - 1));
                 chart2.Series[0].Points.AddXY(iter, window*Sin[d]);
@@ -209,28 +200,77 @@ namespace Ton
             double[] mfc;
            
             mfc = MFCC.mfcc(Sin);
+
+            
             double suma = 0;
             int count = 0;
-            
+
+
             chart3.Series[0].Points.Clear();
             for (int d = 0; d < 12; d++)
             {
                     suma += Math.Abs(mfc[d]);
                     count++;
-                 
+                mfc[d] = Math.Abs(mfc[d]);
                  chart3.Series[0].Points.AddXY(d, Math.Abs(mfc[d]));
                 iter++;
             }
-            double a, b = 0.0;
-            a = suma / count;
-            if (a < 0.5+0.25)
-                MessageBox.Show("Men");
-            else
-                if ((a > 0.5+0.25)&&(a<1+0.25))
-                MessageBox.Show("Woomen");
-          //  MessageBox.Show((suma / count).ToString());
+            double avarege = 0.0;
+              //MessageBox.Show((suma / count).ToString());
+            avarege = suma / count;
+            Recognition(avarege,mfc);
+            //if (Recognition(mfc) > 0)
+             //   MessageBox.Show("Men");
+            //else
+             //   if (Recognition(mfc) <= 0)
+              //  MessageBox.Show("Woomen");
+
+            //double a, b = 0.0;
+            //a = suma / count;
+            //if (a < 0.5+0.25)
+            //    MessageBox.Show("Men");
+            //else
+            //    if ((a > 0.5+0.25)&&(a<1+0.25))
+            //    MessageBox.Show("Woomen");
+          
 
             btnStart.Enabled = true;
+        }
+        private static double Edge = 0.805135; 
+            
+        public void Recognition(double CurrentAvarege, double[] mfc)
+        {
+            int counterUpper = 0;
+            int counterLow = 0;
+            for (int i = 0; i < mfc.Length; i++)
+            {
+                if (mfc[i] > Edge)
+                {
+                    counterUpper++;
+                }
+                if (mfc[i] < Edge)
+                {
+                    counterLow++;
+                }    
+            }
+            if (counterUpper > counterLow)
+            {
+                MessageBox.Show("Wooman." + counterUpper);
+            }
+            else if (counterUpper < counterLow)
+            {
+                MessageBox.Show("Man." + counterLow);
+            }
+            else
+            {
+                if (CurrentAvarege > Edge)
+                {
+                    MessageBox.Show("Wooman.");
+                }
+                else {
+                    MessageBox.Show("Man.");
+                }
+            }
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
