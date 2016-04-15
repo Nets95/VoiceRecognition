@@ -10,8 +10,8 @@ namespace Ton
     public class FFTAforge
     {
         /* Performs a Bit Reversal Algorithm on a postive integer 
-* for given number of bits 
-* e.g. 011 with 3 bits is reversed to 110 */
+        * for given number of bits 
+        * e.g. 011 with 3 bits is reversed to 110 */
         public static int BitReverse(int n, int bits)
         {
             int reversedN = n;

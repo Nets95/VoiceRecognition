@@ -118,12 +118,12 @@ namespace Ton
                 data[i] = block[0];
                 i++;
             }
-           // double k = 0.0;// 1.0 / 44100.0;
+           
             double krok = 0.0;
 
             for (int io = 0; io < data.Length; io++)
             {
-                //k = 1/44100;
+                
                 chart1.Series[0].Points.AddXY(krok, data[io]);
                 krok += 1.0/44100.0;
             }
@@ -139,34 +139,7 @@ namespace Ton
 
 
 
-            //for (int j = 0; j < data.Length; j++)
-            //{
-            //    x[j] = data[j];
-
-
-            //}
-            //int Krok = 0;
             
-            //for (int j = 0; j < Sin.Length; j += 2)
-            //{
-            //    x[Krok] = Sin[j];
-            //    Krok++;
-            //}
-            //Krok = 0;
-            //for (int j = 1; j <= Sin.Length - 1; j += 2)
-            //{
-            //    //y[Krok] = 0;
-            //    y[Krok] = Sin[j];
-            //    Krok++;
-            //}
-            //double m = 15;
-            // m = Math.Round(Math.Log(data.Length/2,2));
-
-            // NeedForSpeed ob = new NeedForSpeed();
-
-            // NeedForSpeed.init((uint)m);
-            //Result =  NeedForSpeed.run( ref x,  ref y, false);
-
             
             int iter = 0;
             Sin = data;
@@ -209,70 +182,28 @@ namespace Ton
             chart3.Series[0].Points.Clear();
             for (int d = 0; d < 12; d++)
             {
-                    suma += Math.Abs(mfc[d]);
-                    count++;
+                suma += Math.Abs(mfc[d]);
+                count++;
                 mfc[d] = Math.Abs(mfc[d]);
-                 chart3.Series[0].Points.AddXY(d, Math.Abs(mfc[d]));
+                chart3.Series[0].Points.AddXY(d, Math.Abs(mfc[d]));
                 iter++;
             }
+
             double avarege = 0.0;
-              //MessageBox.Show((suma / count).ToString());
+            double Edge = 0.805135;
             avarege = suma / count;
-            Recognition(avarege,mfc);
-            //if (Recognition(mfc) > 0)
-             //   MessageBox.Show("Men");
-            //else
-             //   if (Recognition(mfc) <= 0)
-              //  MessageBox.Show("Woomen");
+            
+            if (avarege > Edge)
+                MessageBox.Show("Woomen");
+            else
+                if (avarege <= Edge)
+                MessageBox.Show("Men");
 
-            //double a, b = 0.0;
-            //a = suma / count;
-            //if (a < 0.5+0.25)
-            //    MessageBox.Show("Men");
-            //else
-            //    if ((a > 0.5+0.25)&&(a<1+0.25))
-            //    MessageBox.Show("Woomen");
-          
-
+            
             btnStart.Enabled = true;
         }
-        private static double Edge = 0.805135; 
-            
-        public void Recognition(double CurrentAvarege, double[] mfc)
-        {
-            int counterUpper = 0;
-            int counterLow = 0;
-            for (int i = 0; i < mfc.Length; i++)
-            {
-                if (mfc[i] > Edge)
-                {
-                    counterUpper++;
-                }
-                if (mfc[i] < Edge)
-                {
-                    counterLow++;
-                }    
-            }
-            if (counterUpper > counterLow)
-            {
-                MessageBox.Show("Wooman." + counterUpper);
-            }
-            else if (counterUpper < counterLow)
-            {
-                MessageBox.Show("Man." + counterLow);
-            }
-            else
-            {
-                if (CurrentAvarege > Edge)
-                {
-                    MessageBox.Show("Wooman.");
-                }
-                else {
-                    MessageBox.Show("Man.");
-                }
-            }
-        }
-
+         
+           
         private void tabPage1_Click(object sender, EventArgs e)
         {
 

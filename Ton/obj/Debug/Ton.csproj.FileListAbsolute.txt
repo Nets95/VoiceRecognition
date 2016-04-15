@@ -41,3 +41,4 @@ C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\bin\Debug\NAudio.xml
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.Form1.resources
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.Properties.Resources.resources
 C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.csproj.GenerateResource.Cache
+C:\Users\Ivan Kupranets\Documents\VoiceRecognitionGIT\Ton\obj\Debug\Ton.csprojResolveAssemblyReference.cache
